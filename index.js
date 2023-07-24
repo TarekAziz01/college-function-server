@@ -30,9 +30,9 @@ async function run() {
 
     const collegeCollection = client.db("collegeDb").collection("college");
     const reviewCollection = client.db("collegeDb").collection("review");
+    const researchCollection = client.db("collegeDb").collection("research");
     
     // college collection
-      
       app.get("/college", async (req, res) => {
         const result = await collegeCollection.find().sort({ createdAt: -1 }).toArray();
         res.send(result);
@@ -40,13 +40,16 @@ async function run() {
       
       
     //   review collection
-      
       app.get("/review", async (req, res) => {
         const result = await reviewCollection.find().sort({ createdAt: -1 }).toArray();
         res.send(result);
       });
-      
-      
+
+    //   research collection
+      app.get("/research", async (req, res) => {
+        const result = await researchCollection.find().sort({ createdAt: -1 }).toArray();
+        res.send(result);
+      });
       
       
       
