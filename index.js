@@ -28,8 +28,23 @@ async function run() {
     client.connect();
       
 
+    const collegeCollection = client.db("collegeDb").collection("college");
+    const reviewCollection = client.db("collegeDb").collection("review");
+    
+    // college collection
+      
+      app.get("/college", async (req, res) => {
+        const result = await collegeCollection.find().sort({ createdAt: -1 }).toArray();
+        res.send(result);
+      });
       
       
+    //   review collection
+      
+      app.get("/review", async (req, res) => {
+        const result = await reviewCollection.find().sort({ createdAt: -1 }).toArray();
+        res.send(result);
+      });
       
       
       
@@ -43,7 +58,7 @@ async function run() {
     );
   } finally {
     // Ensures that the client will close when you finish/error
-    await client.close();
+    // await client.close();
   }
 }
 run().catch(console.dir);
